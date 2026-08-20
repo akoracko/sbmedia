@@ -1042,7 +1042,7 @@
   window.addEventListener("message", function (event) {
     if (!event.origin || event.origin.indexOf("calendly.com") === -1) return;
     if (!event.data) return;
-    if (event.data.event === "calendly.event_type_viewed") { calSetCropped(false); calProgress(33); }
+    if (event.data.event === "calendly.event_type_viewed") { calSetCropped(false); calProgress(33, "Step 1 of 2 · Pick a time that suits you"); }
     if (event.data.event === "calendly.date_and_time_selected") { calSetCropped(true); calProgress(72, "Almost done — just your details"); }
     if (event.data.event === "calendly.event_scheduled") { calProgress(100, "You're all booked!"); }
   });
@@ -1215,29 +1215,29 @@
       });
     }, { threshold: 0.01, rootMargin: "0px 0px 8% 0px" });
     rows.forEach(function (el) { io2.observe(el); });
-  })();  /* ---- Universal scroll-hook: position the $ number so its TOP peeks just
-     above the fold on every mobile screen size (consistent hook regardless
-     of device height). Adjusts the proof section's top padding on load /
-     resize so the number's top sits ~34px above the viewport bottom. ---- */
+  })();  /* ---- Universal scroll-hook: show only the TOP of the $ number above the
+     fold on every mobile size. Uses the STABLE viewport height (clientHeight,
+     which ignores the URL-bar show/hide so it never jitters on scroll) and a
+     margin that can push down (big screens) or pull up (small screens). Only
+     recomputes on load / font-ready / orientation change — never on scroll. ---- */
   (function () {
     var proof = document.querySelector(".proof");
     var num = document.getElementById("proofNum");
     if (!proof || !num) return;
-    var PEEK = 34; // px of the number's top left visible above the fold
+    var PEEK = 26; // px of the number's top left visible above the fold
     function place() {
-      if (window.matchMedia("(min-width: 768px)").matches) { proof.style.paddingTop = ""; return; }
-      proof.style.paddingTop = "";                       // reset to natural, then measure
+      if (window.matchMedia("(min-width: 768px)").matches) { proof.style.marginTop = ""; return; }
+      proof.style.marginTop = "";                                  // reset, then measure natural position
       var top = num.getBoundingClientRect().top + window.pageYOffset;
-      var cur = parseFloat(getComputedStyle(proof).paddingTop) || 0;
-      var target = window.innerHeight - PEEK;
-      var np = Math.max(8, cur + (target - top));
-      proof.style.paddingTop = np + "px";
+      var target = document.documentElement.clientHeight - PEEK;
+      var delta = target - top;
+      if (delta < -160) delta = -160;                              // clamp upward pull so it can't overlap the marquee
+      proof.style.marginTop = delta + "px";
     }
     window.addEventListener("load", place);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
-    window.addEventListener("resize", place);
-    window.addEventListener("orientationchange", function () { setTimeout(place, 300); });
-    setTimeout(place, 300);
+    window.addEventListener("orientationchange", function () { setTimeout(place, 350); });
+    setTimeout(place, 400);
   })();
 </script>
 
