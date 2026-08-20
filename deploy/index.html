@@ -442,12 +442,13 @@
     text-align: center; font-size: 11.5px; font-weight: 700; letter-spacing: .16em;
     text-transform: uppercase; color: var(--teal); margin-bottom: 18px;
   }
-  .faces-viewport {
-    overflow: hidden; padding: 8px 0;
-    -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
-    mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+  .faces-viewport { position: relative; overflow: hidden; padding: 8px 0; }
+  .faces-viewport::before, .faces-viewport::after {
+    content: ""; position: absolute; top: 0; bottom: 0; width: 12%; z-index: 2; pointer-events: none;
   }
-  .faces-track { display: flex; gap: 20px; width: max-content; animation: marquee 36s linear infinite; will-change: transform; backface-visibility: hidden; transform: translateZ(0); }
+  .faces-viewport::before { left: 0; background: linear-gradient(90deg, var(--sand), rgba(247,240,230,0)); }
+  .faces-viewport::after { right: 0; background: linear-gradient(270deg, var(--sand), rgba(247,240,230,0)); }
+  .faces-track { display: flex; gap: 20px; width: max-content; transform: translate3d(0,0,0); }
   .face-chip { display: flex; flex-direction: column; align-items: center; gap: 7px; flex: none; width: 74px; }
   .face-chip > img {
     width: 62px; height: 62px; border-radius: 50%; object-fit: cover; object-position: center 22%;
@@ -759,7 +760,7 @@
       </div>
 
       <div class="hero-cta">
-        <a class="cta" href="https://calendly.com/socialbanksmedia/quick-intro-call?hide_gdpr_banner=1&hide_event_type_details=1&primary_color=14b8ac&text_color=2a2621&background_color=f7f0e6" onclick="return openCalendly(event)">
+        <a class="cta cta-num" href="https://calendly.com/socialbanksmedia/quick-intro-call?hide_gdpr_banner=1&hide_event_type_details=1&primary_color=14b8ac&text_color=2a2621&background_color=f7f0e6" onclick="return openCalendly(event)">
           Book My Free Call
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
@@ -882,22 +883,6 @@
     </div>
   </section>
 
-  <!-- ========================= 5. FINAL CTA ========================= -->
-  <section class="final">
-    <div class="wrap">
-      <div class="final-box reveal">
-        <h2>Ready to get paid to post?</h2>
-        <div class="cta-inline-wrap">
-          <a class="cta" href="https://calendly.com/socialbanksmedia/quick-intro-call?hide_gdpr_banner=1&hide_event_type_details=1&primary_color=14b8ac&text_color=2a2621&background_color=f7f0e6" onclick="return openCalendly(event)">
-            Book My Free Call
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-          <p class="cta-note">No commitment · No pressure · Only 15 mins</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ========================= FAQ ========================= -->
   <section class="faq">
     <div class="wrap">
@@ -931,8 +916,15 @@
           <div class="faq-a"><p>Nope. <b>90% of our partners started with zero of both</b> — we build your platform from the ground up and support you the whole way.</p></div>
         </details>
       </div>
-      <div class="faq-cta reveal">
-        <a class="cta cta-num cta-sm" href="https://calendly.com/socialbanksmedia/quick-intro-call?hide_gdpr_banner=1&hide_event_type_details=1&primary_color=14b8ac&text_color=2a2621&background_color=f7f0e6" onclick="return openCalendly(event)">Start today</a>
+      <div class="faq-cta final-box reveal">
+        <h2>Ready to get paid to post?</h2>
+        <div class="cta-inline-wrap">
+          <a class="cta cta-num" href="https://calendly.com/socialbanksmedia/quick-intro-call?hide_gdpr_banner=1&hide_event_type_details=1&primary_color=14b8ac&text_color=2a2621&background_color=f7f0e6" onclick="return openCalendly(event)">
+            Book My Free Call
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <p class="cta-note">No commitment · No pressure · Only 10 mins</p>
+        </div>
       </div>
     </div>
   </section>
@@ -1183,6 +1175,20 @@
       d.appendChild(im); d.appendChild(fn); return d;
     }
     for (let r = 0; r < 2; r++) P.forEach(function (p) { track.appendChild(chip(p)); });
+
+    // rAF-driven scroll — never freezes (no hover-pause / CSS-anim layer eviction) and never blanks
+    var x = 0, last = null, SPEED = 42; // px per second
+    function tick(now) {
+      if (last != null) {
+        x -= SPEED * (now - last) / 1000;
+        var half = track.scrollWidth / 2;
+        if (half > 0 && -x >= half) x += half; // seamless wrap
+        track.style.transform = "translate3d(" + x + "px,0,0)";
+      }
+      last = now;
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
   })();
 
   /* ---- Scroll reveals ---- */
