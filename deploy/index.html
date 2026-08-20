@@ -99,7 +99,7 @@
      instantly on CTA click (no click-time load). */
   #calShell {
     position: fixed; inset: 0; z-index: 9998; display: flex;
-    background: #f7f0e6; opacity: 0; visibility: hidden; pointer-events: none;
+    background: #ffffff; opacity: 0; visibility: hidden; pointer-events: none;
     transition: opacity .2s ease;
   }
   #calShell.open { opacity: 1; visibility: visible; pointer-events: auto; }
@@ -115,25 +115,34 @@
   }
   .cal-topfade {
     position: absolute; top: 0; left: 0; right: 0; height: 20px; z-index: 4; pointer-events: none;
-    background: linear-gradient(#f7f0e6, rgba(247, 240, 230, 0));
+    background: linear-gradient(#ffffff, rgba(255, 255, 255, 0));
     opacity: 0; transition: opacity .2s ease;
   }
   body.cal-cropped .cal-topfade { opacity: 1; }
   .cal-xbtn {
     position: absolute; top: 10px; right: 12px; z-index: 5;
     width: 36px; height: 36px; padding: 0; border: none; border-radius: 50%;
-    background: #14b8ac; color: #fff; font-size: 22px; line-height: 36px;
-    text-align: center; cursor: pointer; box-shadow: 0 4px 14px rgba(20, 184, 172, .45);
+    background: #006bff; color: #fff; font-size: 22px; line-height: 36px;
+    text-align: center; cursor: pointer; box-shadow: 0 4px 14px rgba(0, 107, 255, .4);
   }
+  /* encouraging progress label pill */
+  #calProgLabel {
+    position: absolute; top: 12px; left: 50%; transform: translateX(-50%); z-index: 7;
+    padding: 5px 14px; border-radius: 999px; background: rgba(0, 107, 255, .1); color: #006bff;
+    font-family: "Hanken Grotesk", sans-serif; font-weight: 700; font-size: 11.5px; letter-spacing: .02em;
+    white-space: nowrap; pointer-events: none; opacity: 0; transition: opacity .25s ease;
+    box-shadow: 0 2px 8px rgba(0, 107, 255, .15);
+  }
+  #calProgLabel.show { opacity: 1; }
   /* Step progress bar (our overlay, advances via Calendly's step events) */
   #calProg {
     position: absolute; top: 0; left: 0; right: 0; height: 5px; z-index: 6;
-    background: rgba(20, 184, 172, .16);
+    background: rgba(0, 107, 255, .14);
   }
   #calProgFill {
     height: 100%; width: 33%;
-    background: linear-gradient(90deg, #14b8ac 0%, #34d8cc 100%);
-    box-shadow: 0 0 10px rgba(52, 216, 204, .6);
+    background: linear-gradient(90deg, #4a9bff 0%, #006bff 100%);
+    box-shadow: 0 0 10px rgba(0, 107, 255, .5);
     border-radius: 0 3px 3px 0;
     transition: width .5s cubic-bezier(.4, 0, .2, 1);
   }
@@ -144,7 +153,7 @@
     }
     #calCard {
       flex: none; width: 480px; height: min(90vh, 820px);
-      border-radius: 18px; box-shadow: 0 24px 60px rgba(42, 38, 33, .4); background: #f7f0e6;
+      border-radius: 18px; box-shadow: 0 24px 60px rgba(42, 38, 33, .4); background: #ffffff;
     }
   }
 
@@ -440,7 +449,7 @@
   }
   .faces-track { display: flex; gap: 20px; width: max-content; animation: marquee 36s linear infinite; will-change: transform; backface-visibility: hidden; transform: translateZ(0); }
   .face-chip { display: flex; flex-direction: column; align-items: center; gap: 7px; flex: none; width: 74px; }
-  .face-chip img {
+  .face-chip > img {
     width: 62px; height: 62px; border-radius: 50%; object-fit: cover; object-position: center 22%;
     box-shadow: 0 6px 14px rgba(42,38,33,.16);
     background: var(--teal-tint);
@@ -675,7 +684,7 @@
 
     .faces-track { gap: 30px; }
     .face-chip { width: 94px; }
-    .face-chip img { width: 78px; height: 78px; }
+    .face-chip > img { width: 78px; height: 78px; }
     .plat-chip { width: 104px; height: 104px; border-radius: 26px; }
     .plat-chip img { width: 58px; height: 58px; }
     .social-head { font-size: 40px; }
@@ -790,7 +799,7 @@
   </section>
 
   <!-- see-how-it-works divider: hooks the scroll from the big number into the steps -->
-  <a class="seehow reveal" href="#how">
+  <a class="seehow" href="#how">
     <span>See how it works</span>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v13M6 12l6 6 6-6"/></svg>
   </a>
@@ -799,7 +808,7 @@
   <section class="how" id="how">
     <div class="wrap">
       <div class="how-flow">
-        <div class="how-row reveal">
+        <div class="how-row reveal how-late">
           <div class="n">Step 1</div>
           <h3>We build your <em>page</em></h3>
           <p>We build you a personal brand. No upfront cost — we only ask for a % of <b>the money we make for you.</b></p>
@@ -809,14 +818,14 @@
           <h3>You just <em>post</em></h3>
           <p>We handle the ideation, growth strategy and systems. All you do is press post — <b>no experience needed.</b></p>
         </div>
-        <div class="how-row reveal how-late">
+        <div class="how-row reveal how-late grp3">
           <div class="n">Step 3</div>
           <h3>You get <em>paid</em></h3>
           <p>We land you brand deals and your content becomes income, landing <b>straight in your bank account.</b></p>
         </div>
       </div>
 
-      <div class="how-cta reveal">
+      <div class="how-cta reveal how-late grp3">
         <a class="cta cta-num" href="https://calendly.com/socialbanksmedia/quick-intro-call?hide_gdpr_banner=1&hide_event_type_details=1&primary_color=14b8ac&text_color=2a2621&background_color=f7f0e6" onclick="return openCalendly(event)">
           Start getting paid to post
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -824,7 +833,7 @@
         <p class="cta-note">Free intro call · No pressure · 10 minutes</p>
       </div>
 
-      <div class="how-guarantee reveal">
+      <div class="how-guarantee reveal how-late grp3">
         <span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
         <p><b class="g-amt">$1,000 guarantee</b> — we're so confident we'll get you monetised that if we don't, we'll pay you up to $1,000, so you win either way.</p>
       </div>
@@ -937,6 +946,7 @@
   <div id="calShell" aria-hidden="true">
     <div id="calCard">
       <div id="calProg" aria-hidden="true"><div id="calProgFill"></div></div>
+      <div id="calProgLabel" aria-hidden="true"></div>
       <button class="cal-xbtn" id="calX" type="button" aria-label="Close booking">&times;</button>
       <div class="cal-topfade"></div>
       <div id="calMount"></div>
@@ -950,7 +960,7 @@
   const CALENDLY_URL = "https://calendly.com/socialbanksmedia/quick-intro-call?hide_gdpr_banner=1&hide_event_type_details=1&primary_color=14b8ac&text_color=2a2621&background_color=f7f0e6";
   const VIDEO_ID = "AZxsw3xsrEE"; // unlisted YouTube video
   const BOOKING_CONFIRMED_URL = "https://sbmbookingconfirmed.vercel.app";
-  const IG_BADGE = '<svg class="ig-badge" viewBox="0 0 24 24" aria-hidden="true"><path fill="#2589E0" d="M12 1.6l2.55 1.94 3.19-.2 1 3.05 2.86 1.42-.86 3.07.86 3.06-2.86 1.42-1 3.05-3.19-.2L12 22.4l-2.55-1.93-3.19.2-1-3.05L2.4 16.2l.86-3.06L2.4 10.08l2.86-1.42 1-3.05 3.19.2z"/><path fill="#fff" d="M10.6 15.2l-2.9-2.9 1.28-1.28 1.62 1.62 4.12-4.12 1.28 1.28z"/></svg>';
+  const IG_BADGE = '<img class="ig-badge" src="assets/ig-verified.png" alt="Verified" width="14" height="14" loading="eager" decoding="async" />';
 
   /* ---- Calendly booking confirmation → redirect (client-side, replaces
      Calendly's own "redirect on booking" setting, which stays OFF) ----
@@ -1028,16 +1038,21 @@
   })();
 
   // Crop the time/timezone summary off the form step (mobile) once a time is picked.
-  function calProgress(pct) {
+  function calProgress(pct, label) {
     var f = document.getElementById("calProgFill");
     if (f) f.style.width = pct + "%";
+    var l = document.getElementById("calProgLabel");
+    if (l) {
+      if (label) { l.textContent = label; l.classList.add("show"); }
+      else { l.classList.remove("show"); }
+    }
   }
   window.addEventListener("message", function (event) {
     if (!event.origin || event.origin.indexOf("calendly.com") === -1) return;
     if (!event.data) return;
     if (event.data.event === "calendly.event_type_viewed") { calSetCropped(false); calProgress(33); }
-    if (event.data.event === "calendly.date_and_time_selected") { calSetCropped(true); calProgress(72); }
-    if (event.data.event === "calendly.event_scheduled") { calProgress(100); }
+    if (event.data.event === "calendly.date_and_time_selected") { calSetCropped(true); calProgress(72, "Almost done — just your details"); }
+    if (event.data.event === "calendly.event_scheduled") { calProgress(100, "You're all booked!"); }
   });
 
   /* ---- VSL embed: preloaded YouTube IFrame Player. Tap the facade -> instant unmuted play,
@@ -1184,8 +1199,15 @@
     /* How-it-works steps 2 & 3 reveal a little later (must scroll further) */
     const rows = document.querySelectorAll(".how-late");
     const io2 = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("in"); io2.unobserve(en.target); } });
-    }, { threshold: 0.15, rootMargin: "0px 0px -12% 0px" });
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        if (en.target.classList.contains("grp3")) {
+          document.querySelectorAll(".grp3").forEach(function (g) { g.classList.add("in"); io2.unobserve(g); });
+        } else {
+          en.target.classList.add("in"); io2.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.01, rootMargin: "0px 0px 8% 0px" });
     rows.forEach(function (el) { io2.observe(el); });
   })();
 </script>
