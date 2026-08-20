@@ -286,6 +286,24 @@
   }
   .video-facade:hover .video-play { transform: translate(-50%, -50%) scale(1.08); }
   .video-play svg { width: 66px; height: 66px; fill: rgba(14,156,148,.62); }
+  .video-tag {
+    position: absolute; top: 8px; left: 8px; z-index: 6;
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 4px 7px; border-radius: 999px;
+    background: rgba(20,30,28,.42); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+    color: #fff; font-family: "Hanken Grotesk", sans-serif; font-weight: 700; font-size: 10px;
+    letter-spacing: 0; pointer-events: none;
+  }
+  .video-tag::before {
+    content: ""; width: 4px; height: 4px; border-radius: 50%; background: #34d8cc;
+    box-shadow: 0 0 0 0 rgba(52,216,204,.7); animation: tagPulse 1.8s ease-out infinite;
+  }
+  @keyframes tagPulse {
+    0% { box-shadow: 0 0 0 0 rgba(52,216,204,.6); }
+    70% { box-shadow: 0 0 0 7px rgba(52,216,204,0); }
+    100% { box-shadow: 0 0 0 0 rgba(52,216,204,0); }
+  }
+  .video-wrap.is-playing .video-tag { display: none; }
 
   .hero-cta { margin-top: 26px; }
 
@@ -500,7 +518,13 @@
 
   /* How it works — centered, matches the site's serif style */
   .how { border-top: 1px solid var(--line); }
-  .how .section-head { margin-bottom: 40px; }
+  .how .section-head {
+    margin-bottom: 40px; display: inline-block; width: auto;
+    background: linear-gradient(160deg, var(--cream) 0%, var(--teal-tint) 100%);
+    border: 1px solid var(--teal-tint); border-radius: 18px;
+    padding: 16px 30px; box-shadow: var(--shadow-sm);
+  }
+  .how .section-head-wrap { text-align: center; }
   .how .section-head h2 { margin: 0; }
   .how-flow { max-width: 420px; margin: 0 auto; display: flex; flex-direction: column; gap: 64px; }
   .how-row { text-align: center; }
@@ -518,7 +542,11 @@
     margin: 0 auto; max-width: 30ch;
     font-family: "Newsreader", Georgia, serif; font-weight: 400; font-size: 17px; line-height: 1.55; color: var(--muted);
   }
-  .how-row p b { color: var(--teal-deep); font-weight: 600; }
+  .how-row p b {
+    background: linear-gradient(120deg, #1D6FE0 0%, #38BDF8 55%, #22D3EE 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: #2A8FE0; font-weight: 700;
+  }
   /* downward cue between steps — signals there's more below */
   .how-row { position: relative; padding-bottom: 4px; }
   .how-flow .how-row:not(:last-child)::after {
@@ -610,6 +638,8 @@
     .hero h1 { font-size: 60px; }
     .hero-sub { font-size: 21px; }
     .video-wrap { max-width: 760px; margin: 0 auto; }
+    .video-tag { top: 12px; left: 12px; gap: 7px; padding: 7px 12px; font-size: 12px; }
+    .video-tag::before { width: 7px; height: 7px; }
     .hero-cta { max-width: 440px; margin: 26px auto 0; }
     .cta { min-height: 52px; font-size: 16px; padding: 15px 28px; }
     .cta svg { width: 17px; height: 17px; }
@@ -744,9 +774,11 @@
   <!-- ========================= HOW IT WORKS ========================= -->
   <section class="how">
     <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow" style="color:var(--charcoal)">The process</span>
-        <h2 style="color:var(--teal)">How it works</h2>
+      <div class="section-head-wrap reveal">
+        <div class="section-head">
+          <span class="eyebrow" style="color:var(--charcoal)">The 3 step process</span>
+          <h2 style="color:var(--teal)">How it works</h2>
+        </div>
       </div>
       <div class="how-flow">
         <div class="how-row reveal">
