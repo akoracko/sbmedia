@@ -580,7 +580,7 @@
   .how-guarantee {
     max-width: 440px; margin: 18px auto 0;
     display: flex; align-items: flex-start; gap: 10px;
-    background: rgba(42,38,33,.045); border: 1px solid var(--line); border-radius: 14px;
+    background: rgba(14,156,148,.07); border: 1px solid var(--teal-tint); border-radius: 14px;
     padding: 14px 18px; text-align: left;
   }
   .how-guarantee .tick {
@@ -1215,6 +1215,29 @@
       });
     }, { threshold: 0.01, rootMargin: "0px 0px 8% 0px" });
     rows.forEach(function (el) { io2.observe(el); });
+  })();  /* ---- Universal scroll-hook: position the $ number so its TOP peeks just
+     above the fold on every mobile screen size (consistent hook regardless
+     of device height). Adjusts the proof section's top padding on load /
+     resize so the number's top sits ~34px above the viewport bottom. ---- */
+  (function () {
+    var proof = document.querySelector(".proof");
+    var num = document.getElementById("proofNum");
+    if (!proof || !num) return;
+    var PEEK = 34; // px of the number's top left visible above the fold
+    function place() {
+      if (window.matchMedia("(min-width: 768px)").matches) { proof.style.paddingTop = ""; return; }
+      proof.style.paddingTop = "";                       // reset to natural, then measure
+      var top = num.getBoundingClientRect().top + window.pageYOffset;
+      var cur = parseFloat(getComputedStyle(proof).paddingTop) || 0;
+      var target = window.innerHeight - PEEK;
+      var np = Math.max(8, cur + (target - top));
+      proof.style.paddingTop = np + "px";
+    }
+    window.addEventListener("load", place);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
+    window.addEventListener("resize", place);
+    window.addEventListener("orientationchange", function () { setTimeout(place, 300); });
+    setTimeout(place, 300);
   })();
 </script>
 
