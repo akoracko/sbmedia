@@ -391,12 +391,9 @@
     transition: transform .2s ease;
   }
   .t-avatar:hover { transform: scale(1.05); }
-  .t-name { display: inline-flex; align-items: center; gap: 5px; font-family: "Hanken Grotesk", sans-serif; font-weight: 700; font-size: 14px; color: var(--charcoal); line-height: 1.2; }
-  .t-name span { display: inline-flex; align-items: center; gap: 4px; font-weight: 600; font-size: 10.5px; color: var(--teal-deep); margin-top: 4px; white-space: nowrap; }
-  .t-name span::before {
-    content: ""; width: 13px; height: 13px; border-radius: 50%; flex: none;
-    background: var(--teal) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E") center/9px no-repeat;
-  }
+  .t-name { display: flex; flex-direction: column; align-items: center; gap: 3px; font-family: "Hanken Grotesk", sans-serif; line-height: 1.2; }
+  .t-name .tn-name { display: inline-flex; align-items: center; gap: 5px; font-weight: 700; font-size: 14px; color: var(--charcoal); }
+  .t-name .tn-role { font-weight: 600; font-size: 10.5px; color: var(--muted); }
   .t-bubble {
     position: relative; flex: 1; min-height: 118px;
     display: flex; align-items: center;
@@ -441,8 +438,7 @@
     -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
     mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
   }
-  .faces-track { display: flex; gap: 20px; width: max-content; animation: marquee 36s linear infinite; }
-  .faces-viewport:hover .faces-track { animation-play-state: paused; }
+  .faces-track { display: flex; gap: 20px; width: max-content; animation: marquee 36s linear infinite; will-change: transform; backface-visibility: hidden; transform: translateZ(0); }
   .face-chip { display: flex; flex-direction: column; align-items: center; gap: 7px; flex: none; width: 74px; }
   .face-chip img {
     width: 62px; height: 62px; border-radius: 50%; object-fit: cover; object-position: center 22%;
@@ -1125,7 +1121,7 @@
     function render() {
       const t = T[i];
       q.textContent = "\u201C" + t.q + "\u201D";
-      name.innerHTML = t.n + IG_BADGE;
+      name.innerHTML = '<span class="tn-name">' + t.n + IG_BADGE + '</span><span class="tn-role">SBM partner</span>';
       av.src = (window.__resources && window.__resources[t.img]) || t.img; av.alt = t.n;
       idx.textContent = i + 1;
     }
@@ -1189,7 +1185,7 @@
     const rows = document.querySelectorAll(".how-late");
     const io2 = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("in"); io2.unobserve(en.target); } });
-    }, { threshold: 0.6, rootMargin: "0px 0px -28% 0px" });
+    }, { threshold: 0.15, rootMargin: "0px 0px -12% 0px" });
     rows.forEach(function (el) { io2.observe(el); });
   })();
 </script>
