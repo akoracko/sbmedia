@@ -175,6 +175,8 @@
     --teal:        #0E9C94;
     --teal-deep:   #0B7E77;
     --teal-tint:   #E1F2F0;
+    --blue:        #2589E0;
+    --blue-deep:   #1C6FD0;
 
     --shadow-sm: 0 2px 10px rgba(42, 38, 33, 0.06);
     --shadow-md: 0 12px 34px rgba(42, 38, 33, 0.10);
@@ -323,7 +325,7 @@
   /* ============================================================
      2. PROOF — $ counter + the win-win line (mobile) beneath it
      ============================================================ */
-  .proof { padding-top: 22px; padding-bottom: 34px; }
+  .proof { padding-top: 22px; padding-bottom: 16px; }
   .testi { padding-top: 26px; }
   .proof-strip {
     position: relative;
@@ -337,9 +339,7 @@
     -webkit-text-fill-color: transparent; color: #12B7AC;
     font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1;
     filter: drop-shadow(0 2px 10px rgba(52,216,204,.4));
-    opacity: 0; transition: opacity .4s ease;
   }
-  .proof-strip .big.counting { opacity: 1; }
   .proof-strip .lbl {
     font-family: "Newsreader", Georgia, serif; font-size: 19px; color: var(--charcoal);
     margin-top: 12px; font-weight: 600;
@@ -348,6 +348,18 @@
     font-size: 12px; color: var(--muted); margin-top: 7px;
     letter-spacing: .06em; text-transform: uppercase;
   }
+  /* see-how-it-works divider pill (replaces the old win-win line) */
+  .seehow {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    width: max-content; margin: 0 auto 0; padding: 12px 22px;
+    background: var(--card); border: 1px solid var(--line); border-radius: 999px;
+    box-shadow: var(--shadow-sm); text-decoration: none; color: var(--charcoal);
+    font-family: "Hanken Grotesk", sans-serif; font-weight: 700; font-size: 12px;
+    letter-spacing: .14em; text-transform: uppercase;
+  }
+  .seehow svg { width: 18px; height: 18px; color: var(--teal); animation: seehowBob 1.8s ease-in-out infinite; }
+  @keyframes seehowBob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+  @media (prefers-reduced-motion: reduce) { .seehow svg { animation: none; } }
   /* win-win reassurance line — shown on mobile only (on desktop it lives in the stat row) */
   .proof-tag {
     text-align: center; margin-top: 18px;
@@ -379,7 +391,7 @@
     transition: transform .2s ease;
   }
   .t-avatar:hover { transform: scale(1.05); }
-  .t-name { font-family: "Hanken Grotesk", sans-serif; font-weight: 700; font-size: 14px; color: var(--charcoal); line-height: 1.2; }
+  .t-name { display: inline-flex; align-items: center; gap: 5px; font-family: "Hanken Grotesk", sans-serif; font-weight: 700; font-size: 14px; color: var(--charcoal); line-height: 1.2; }
   .t-name span { display: inline-flex; align-items: center; gap: 4px; font-weight: 600; font-size: 10.5px; color: var(--teal-deep); margin-top: 4px; white-space: nowrap; }
   .t-name span::before {
     content: ""; width: 13px; height: 13px; border-radius: 50%; flex: none;
@@ -437,7 +449,7 @@
     box-shadow: 0 6px 14px rgba(42,38,33,.16);
     background: var(--teal-tint);
   }
-  .face-chip .fn { font-size: 12px; font-weight: 700; color: var(--charcoal); line-height: 1; }
+  .face-chip .fn { display: flex; align-items: center; justify-content: center; gap: 4px; font-size: 12px; font-weight: 700; color: var(--charcoal); line-height: 1; }
   .face-chip .fr { font-size: 10px; color: var(--muted); line-height: 1; }
   @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
   @media (prefers-reduced-motion: reduce) { .faces-track { animation: none; } }
@@ -517,7 +529,7 @@
   .foot .brand { color: #9a8f7d; font-family: "Hanken Grotesk", sans-serif; font-weight: 700; font-size: 14px; letter-spacing: .01em; }
 
   /* How it works — centered, matches the site's serif style */
-  .how { border-top: 1px solid var(--line); }
+  .how { }
   .how .section-head {
     margin-bottom: 40px; display: inline-block; width: auto;
     background: linear-gradient(160deg, var(--cream) 0%, var(--teal-tint) 100%);
@@ -542,11 +554,7 @@
     margin: 0 auto; max-width: 30ch;
     font-family: "Newsreader", Georgia, serif; font-weight: 400; font-size: 17px; line-height: 1.55; color: var(--muted);
   }
-  .how-row p b {
-    background: linear-gradient(120deg, #1D6FE0 0%, #38BDF8 55%, #22D3EE 100%);
-    -webkit-background-clip: text; background-clip: text;
-    -webkit-text-fill-color: transparent; color: #2A8FE0; font-weight: 700;
-  }
+  .how-row p b { color: var(--muted); font-weight: 400; }
   /* downward cue between steps — signals there's more below */
   .how-row { position: relative; padding-bottom: 4px; }
   .how-flow .how-row:not(:last-child)::after {
@@ -564,27 +572,42 @@
   }
   @media (prefers-reduced-motion: reduce) { .how-flow .how-row::after { animation: none; } }
   .how-guarantee {
-    max-width: 520px; margin: 52px auto 0;
-    background: linear-gradient(160deg, var(--cream) 0%, var(--teal-tint) 100%);
-    border: 1px solid var(--teal-tint); border-radius: 18px;
-    padding: 16px 24px; text-align: center; box-shadow: var(--shadow-sm);
+    max-width: 440px; margin: 18px auto 0;
+    display: flex; align-items: flex-start; gap: 10px;
+    background: rgba(42,38,33,.045); border: 1px solid var(--line); border-radius: 14px;
+    padding: 14px 18px; text-align: left;
   }
   .how-guarantee .tick {
-    width: 32px; height: 32px; border-radius: 50%; margin: 0 auto 8px;
+    flex: none; width: 22px; height: 22px; border-radius: 50%; margin-top: 1px;
     background: var(--teal); color: #fff; display: grid; place-items: center;
-    box-shadow: 0 6px 16px rgba(20,130,122,.3);
   }
-  .how-guarantee .tick svg { width: 16px; height: 16px; }
-  .how-guarantee h3 {
-    font-family: "DM Serif Display", Georgia, serif; font-weight: 400; font-size: 24px;
-    color: var(--charcoal); margin: 0 0 5px; letter-spacing: -0.01em; line-height: 1.05;
-  }
-  .how-guarantee h3 em { font-style: italic; color: var(--teal); }
+  .how-guarantee .tick svg { width: 12px; height: 12px; }
   .how-guarantee p {
-    margin: 0 auto; max-width: 40ch;
-    font-family: "Newsreader", Georgia, serif; font-size: 15px; line-height: 1.45; color: var(--muted);
+    margin: 0;
+    font-family: "Newsreader", Georgia, serif; font-size: 14.5px; line-height: 1.5; color: var(--muted);
   }
-  .how-guarantee b { color: var(--teal-deep); font-weight: 600; }
+  .how-guarantee b { color: var(--charcoal); font-weight: 600; }
+  .how-guarantee b.g-amt { color: var(--teal-deep); font-weight: 700; }
+
+  /* teal CTA variant (matches the big number) with a soft glow */
+  .cta-num {
+    background: linear-gradient(120deg, #0B7E77 0%, #12B7AC 48%, #34D8CC 100%);
+    box-shadow: 0 4px 14px -4px rgba(18,183,172,.5), 0 0 16px rgba(52,216,204,.4);
+  }
+  .cta-num:hover { box-shadow: 0 8px 22px -6px rgba(18,183,172,.6), 0 0 22px rgba(52,216,204,.55); }
+
+  /* blue CTA variant (matches the win-win blue) + compact size */
+  .cta-blue {
+    background: linear-gradient(180deg, #3A97E8 0%, #2589E0 58%, #1C6FD0 100%);
+    box-shadow: 0 4px 12px -5px rgba(28,111,208,.4), 0 0 10px rgba(56,189,248,.22);
+  }
+  .cta-blue:hover { box-shadow: 0 8px 18px -6px rgba(28,111,208,.5), 0 0 14px rgba(56,189,248,.3); }
+  .how-cta { max-width: 420px; margin: 46px auto 0; }
+  .cta-sm { width: max-content; min-height: 0; padding: 13px 32px; margin: 0 auto; }
+  .faq-cta { text-align: center; margin-top: 30px; }
+
+  /* Instagram verified badge */
+  .ig-badge { width: 14px; height: 14px; flex: none; display: inline-block; vertical-align: middle; }
   .how-start {
     display: block; width: max-content; margin: 14px auto 0;
     font-family: "Hanken Grotesk", sans-serif; font-weight: 700; font-size: 13.5px; color: #fff;
@@ -735,6 +758,7 @@
           Book My Free Call
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
+        <p class="cta-note">10 minute no-pressure intro call</p>
       </div>
 
       <!-- At-a-glance stats (mobile: 4; desktop: 5 incl. win-win) -->
@@ -761,46 +785,52 @@
   <!-- ========================= PROOF (under the face carousel) ========================= -->
   <section class="proof">
     <div class="wrap">
-      <div class="proof-strip reveal">
-        <div class="big" id="proofNum" data-from="5000" data-to="105786">$5,000</div>
+      <div class="proof-strip">
+        <div class="big" id="proofNum">$105,786</div>
         <p class="lbl">made for our partners</p>
         <p class="sub">in the last 6 months</p>
       </div>
-      <!-- win-win reassurance line (mobile) -->
-      <p class="proof-tag reveal">We only win when you win.</p>
     </div>
   </section>
 
+  <!-- see-how-it-works divider: hooks the scroll from the big number into the steps -->
+  <a class="seehow reveal" href="#how">
+    <span>See how it works</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v13M6 12l6 6 6-6"/></svg>
+  </a>
+
   <!-- ========================= HOW IT WORKS ========================= -->
-  <section class="how">
+  <section class="how" id="how">
     <div class="wrap">
-      <div class="section-head-wrap reveal">
-        <div class="section-head">
-          <span class="eyebrow" style="color:var(--charcoal)">The 3 step process</span>
-          <h2 style="color:var(--teal)">How it works</h2>
-        </div>
-      </div>
       <div class="how-flow">
         <div class="how-row reveal">
           <div class="n">Step 1</div>
           <h3>We build your <em>page</em></h3>
           <p>We build you a personal brand. No upfront cost — we only ask for a % of <b>the money we make for you.</b></p>
         </div>
-        <div class="how-row reveal">
+        <div class="how-row reveal how-late">
           <div class="n">Step 2</div>
           <h3>You just <em>post</em></h3>
           <p>We handle the ideation, growth strategy and systems. All you do is press post — <b>no experience needed.</b></p>
         </div>
-        <div class="how-row reveal">
+        <div class="how-row reveal how-late">
           <div class="n">Step 3</div>
           <h3>You get <em>paid</em></h3>
           <p>We land you brand deals and your content becomes income, landing <b>straight in your bank account.</b></p>
         </div>
       </div>
+
+      <div class="how-cta reveal">
+        <a class="cta cta-num" href="https://calendly.com/socialbanksmedia/quick-intro-call?hide_gdpr_banner=1&hide_event_type_details=1&primary_color=14b8ac&text_color=2a2621&background_color=f7f0e6" onclick="return openCalendly(event)">
+          Start getting paid to post
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <p class="cta-note">Free intro call · No pressure · 10 minutes</p>
+      </div>
+
       <div class="how-guarantee reveal">
         <span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
-        <h3><em>$1,000</em> guarantee</h3>
-        <p>We're so confident we'll land you brand deals that if we don't, we'll pay you up to <b>$1,000 out of our own pocket.</b></p>
+        <p><b class="g-amt">$1,000 guarantee</b> — we're so confident we'll get you monetised that if we don't, we'll pay you up to $1,000, so you win either way.</p>
       </div>
     </div>
   </section>
@@ -896,6 +926,9 @@
           <div class="faq-a"><p>Nope. <b>90% of our partners started with zero of both</b> — we build your platform from the ground up and support you the whole way.</p></div>
         </details>
       </div>
+      <div class="faq-cta reveal">
+        <a class="cta cta-num cta-sm" href="https://calendly.com/socialbanksmedia/quick-intro-call?hide_gdpr_banner=1&hide_event_type_details=1&primary_color=14b8ac&text_color=2a2621&background_color=f7f0e6" onclick="return openCalendly(event)">Start today</a>
+      </div>
     </div>
   </section>
 
@@ -921,6 +954,7 @@
   const CALENDLY_URL = "https://calendly.com/socialbanksmedia/quick-intro-call?hide_gdpr_banner=1&hide_event_type_details=1&primary_color=14b8ac&text_color=2a2621&background_color=f7f0e6";
   const VIDEO_ID = "AZxsw3xsrEE"; // unlisted YouTube video
   const BOOKING_CONFIRMED_URL = "https://sbmbookingconfirmed.vercel.app";
+  const IG_BADGE = '<svg class="ig-badge" viewBox="0 0 24 24" aria-hidden="true"><path fill="#2589E0" d="M12 1.6l2.55 1.94 3.19-.2 1 3.05 2.86 1.42-.86 3.07.86 3.06-2.86 1.42-1 3.05-3.19-.2L12 22.4l-2.55-1.93-3.19.2-1-3.05L2.4 16.2l.86-3.06L2.4 10.08l2.86-1.42 1-3.05 3.19.2z"/><path fill="#fff" d="M10.6 15.2l-2.9-2.9 1.28-1.28 1.62 1.62 4.12-4.12 1.28 1.28z"/></svg>';
 
   /* ---- Calendly booking confirmation → redirect (client-side, replaces
      Calendly's own "redirect on booking" setting, which stays OFF) ----
@@ -1091,7 +1125,7 @@
     function render() {
       const t = T[i];
       q.textContent = "\u201C" + t.q + "\u201D";
-      name.innerHTML = t.n + "<span>SBM partner</span>";
+      name.innerHTML = t.n + IG_BADGE;
       av.src = (window.__resources && window.__resources[t.img]) || t.img; av.alt = t.n;
       idx.textContent = i + 1;
     }
@@ -1133,48 +1167,30 @@
     ];
     function chip(p) {
       const d = document.createElement("div"); d.className = "face-chip";
-      const im = document.createElement("img"); im.src = (window.__resources && window.__resources[p.img]) || p.img; im.alt = p.n; im.loading = "lazy"; im.width = 62; im.height = 62;
-      const fn = document.createElement("div"); fn.className = "fn"; fn.textContent = p.n;
-      const fr = document.createElement("div"); fr.className = "fr"; fr.textContent = "SBM partner";
-      d.appendChild(im); d.appendChild(fn); d.appendChild(fr); return d;
+      const im = document.createElement("img"); im.src = (window.__resources && window.__resources[p.img]) || p.img; im.alt = p.n; im.loading = "eager"; im.decoding = "async"; im.width = 62; im.height = 62;
+      const fn = document.createElement("div"); fn.className = "fn"; fn.innerHTML = p.n + IG_BADGE;
+      d.appendChild(im); d.appendChild(fn); return d;
     }
     for (let r = 0; r < 2; r++) P.forEach(function (p) { track.appendChild(chip(p)); });
   })();
 
   /* ---- Scroll reveals ---- */
   (function () {
-    const els = document.querySelectorAll(".reveal");
-    if (!("IntersectionObserver" in window)) { els.forEach(function (el) { el.classList.add("in"); }); return; }
+    const els = document.querySelectorAll(".reveal:not(.how-late)");
+    if (!("IntersectionObserver" in window)) {
+      document.querySelectorAll(".reveal").forEach(function (el) { el.classList.add("in"); }); return;
+    }
     const io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } });
     }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
     els.forEach(function (el) { io.observe(el); });
-  })();
 
-  /* ---- Proof counter: ticks from data-from up to data-to when scrolled into view ---- */
-  (function () {
-    const el = document.getElementById("proofNum");
-    if (!el) return;
-    const from = +el.dataset.from, to = +el.dataset.to;
-    let done = false;
-    const fmt = function (n) { return "$" + Math.round(n).toLocaleString("en-US"); };
-    function run() {
-      if (done) return; done = true;
-      el.classList.add("counting");
-      const dur = 2000, t0 = performance.now();
-      function step(now) {
-        const p = Math.min(1, (now - t0) / dur);
-        const e = 1 - Math.pow(1 - p, 3);
-        el.textContent = fmt(from + (to - from) * e);
-        if (p < 1) requestAnimationFrame(step); else el.textContent = fmt(to);
-      }
-      requestAnimationFrame(step);
-    }
-    if (!("IntersectionObserver" in window)) { run(); return; }
-    const io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) { if (en.isIntersecting) { run(); io.disconnect(); } });
-    }, { threshold: 0.6, rootMargin: "0px 0px -20% 0px" });
-    io.observe(el);
+    /* How-it-works steps 2 & 3 reveal a little later (must scroll further) */
+    const rows = document.querySelectorAll(".how-late");
+    const io2 = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("in"); io2.unobserve(en.target); } });
+    }, { threshold: 0.6, rootMargin: "0px 0px -28% 0px" });
+    rows.forEach(function (el) { io2.observe(el); });
   })();
 </script>
 
