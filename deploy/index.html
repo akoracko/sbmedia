@@ -1223,16 +1223,22 @@
   (function () {
     var proof = document.querySelector(".proof");
     var num = document.getElementById("proofNum");
-    if (!proof || !num) return;
-    var PEEK = 26; // px of the number's top left visible above the fold
+    var faces = document.querySelector(".faces");
+    var hero = document.querySelector(".hero");
+    if (!proof || !num || !faces || !hero) return;
+    var PEEK = 24; // px of the number's top left visible above the fold
     function place() {
-      if (window.matchMedia("(min-width: 768px)").matches) { proof.style.marginTop = ""; return; }
-      proof.style.marginTop = "";                                  // reset, then measure natural position
+      faces.style.marginTop = "";
+      if (window.matchMedia("(min-width: 768px)").matches) return;   // desktop: natural flow
       var top = num.getBoundingClientRect().top + window.pageYOffset;
       var target = document.documentElement.clientHeight - PEEK;
-      var delta = target - top;
-      if (delta < -160) delta = -160;                              // clamp upward pull so it can't overlap the marquee
-      proof.style.marginTop = delta + "px";
+      var delta = target - top;                                      // shift marquee + number together
+      // don't pull the marquee up into the hero note (keep a 16px gap)
+      var facesTop = faces.getBoundingClientRect().top + window.pageYOffset;
+      var heroBottom = hero.getBoundingClientRect().bottom + window.pageYOffset;
+      var maxUp = Math.max(0, facesTop - heroBottom - 16);
+      if (delta < -maxUp) delta = -maxUp;
+      faces.style.marginTop = delta + "px";
     }
     window.addEventListener("load", place);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
