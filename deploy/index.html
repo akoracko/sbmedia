@@ -464,6 +464,7 @@
      SOCIAL PROOF — platform logos + offer line (under win-win)
      ============================================================ */
   .social-proof { padding: 40px 0 var(--section-y); border-top: 1px solid var(--line); }
+  .common-panel { margin-top: 36px; }
   .social-panel {
     background: linear-gradient(160deg, var(--cream) 0%, var(--teal-tint) 100%);
     border: 1px solid var(--teal-tint); border-radius: 22px;
@@ -492,9 +493,9 @@
   }
   .social-head em {
     font-style: italic;
-    background: linear-gradient(90deg, var(--teal) 0%, var(--teal-deep) 100%);
+    background: linear-gradient(120deg, #3AC9BE 0%, #34D8CC 55%, #5FE6DC 100%);
     -webkit-background-clip: text; background-clip: text; color: transparent;
-    text-shadow: 0 2px 18px rgba(30,168,159,.28);
+    text-shadow: 0 2px 18px rgba(52,216,204,.32);
   }
   .social-line {
     text-align: center; max-width: 30ch; margin: 0 auto;
@@ -555,12 +556,16 @@
     font-family: "DM Serif Display", Georgia, serif; font-weight: 400; font-size: 30px;
     color: var(--charcoal); margin: 0 0 10px; letter-spacing: -0.01em; line-height: 1.06;
   }
-  .how-row h3 em { font-style: italic; color: var(--teal); }
+  .how-row h3 em { font-style: italic; color: var(--charcoal); }
   .how-row p {
     margin: 0 auto; max-width: 30ch;
     font-family: "Newsreader", Georgia, serif; font-weight: 400; font-size: 17px; line-height: 1.55; color: var(--muted);
   }
-  .how-row p b { color: var(--muted); font-weight: 400; }
+  .how-row p b {
+    background: linear-gradient(120deg, #3AC9BE 0%, #34D8CC 55%, #5FE6DC 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: #34D8CC; font-weight: 600;
+  }
   /* downward cue between steps — signals there's more below */
   .how-row { position: relative; padding-bottom: 4px; }
   .how-flow .how-row:not(:last-child)::after {
@@ -812,17 +817,17 @@
         <div class="how-row reveal how-late">
           <div class="n">Step 1</div>
           <h3>We build your <em>page</em></h3>
-          <p>We build you a personal brand. No upfront cost — we only ask for a % of <b>the money we make for you.</b></p>
+          <p>We build you a personal brand. <b>You don't pay us</b> — we only ask for a % of the money we make for you.</p>
         </div>
         <div class="how-row reveal how-late">
           <div class="n">Step 2</div>
           <h3>You just <em>post</em></h3>
-          <p>We handle the ideation, growth strategy and systems. All you do is press post — <b>no experience needed.</b></p>
+          <p>We handle the ideation, growth strategy and systems. You just press post — takes <b>just 15 mins a day</b>, no experience needed.</p>
         </div>
         <div class="how-row reveal how-late grp3">
           <div class="n">Step 3</div>
           <h3>You get <em>paid</em></h3>
-          <p>We land you brand deals and your content becomes income, landing <b>straight in your bank account.</b></p>
+          <p>We land you brand deals and your <b>content becomes income</b>, landing straight in your bank account.</p>
         </div>
       </div>
 
@@ -842,19 +847,6 @@
   </section>
 
   <!-- ========================= SOCIAL PROOF — platforms + offer line ========================= -->
-  <section class="social-proof">
-    <div class="wrap">
-      <div class="social-panel">
-        <div class="social-logos">
-          <span class="plat-chip"><img src="assets/social/tiktok.png" alt="TikTok" width="48" height="48" loading="lazy" /></span>
-          <span class="plat-chip"><img src="assets/social/instagram.png" alt="Instagram" width="48" height="48" loading="lazy" /></span>
-        </div>
-        <h3 class="social-head">Just <em>15 minutes a day</em></h3>
-        <p class="social-line">Turn the apps you already scroll every day into <b>real income</b>, just like our partners.</p>
-      </div>
-    </div>
-  </section>
-
   <!-- ========================= TESTIMONIALS ========================= -->
   <section class="testi">
     <div class="wrap">
@@ -879,6 +871,15 @@
         <button class="t-arrow" id="tPrev" aria-label="Previous testimonial">&lsaquo;</button>
         <div class="t-count"><span id="tIndex">1</span> / <span id="tTotal">9</span></div>
         <button class="t-arrow" id="tNext" aria-label="Next testimonial">&rsaquo;</button>
+      </div>
+
+      <div class="social-panel common-panel">
+        <div class="social-logos">
+          <span class="plat-chip"><img src="assets/social/tiktok.png" alt="TikTok" width="48" height="48" loading="lazy" /></span>
+          <span class="plat-chip"><img src="assets/social/instagram.png" alt="Instagram" width="48" height="48" loading="lazy" /></span>
+        </div>
+        <h3 class="social-head">The same <em>15 mins</em></h3>
+        <p class="social-line">They were scrolling the same apps as you every day, just for fun. Now they get paid to post.</p>
       </div>
     </div>
   </section>
