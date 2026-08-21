@@ -401,9 +401,12 @@
   }
   .t-avatar {
     width: 72px; height: 72px; border-radius: 50%; flex: none;
-    object-fit: cover; object-position: center 22%; background: var(--teal-tint);
-    border: 2px solid var(--card);
-    box-shadow: 0 0 0 2px var(--teal), 0 6px 16px rgba(42,38,33,.18);
+    object-fit: cover; object-position: center 22%;
+    border: 3px solid transparent;
+    background:
+      linear-gradient(var(--card), var(--card)) padding-box,
+      conic-gradient(from 0deg, #0B7E77, #34D8CC, #5FE6DC, #12B7AC, #0B7E77) border-box;
+    box-shadow: 0 0 12px 1px rgba(52,216,204,.55), 0 6px 16px rgba(42,38,33,.18);
     transition: transform .2s ease;
   }
   .t-avatar:hover { transform: scale(1.05); }
