@@ -471,7 +471,7 @@
      SOCIAL PROOF — platform logos + offer line (under win-win)
      ============================================================ */
   .social-proof { padding: 40px 0 var(--section-y); border-top: 1px solid var(--line); }
-  .common-panel { margin-top: 36px; }
+  .social-panel.common-panel { margin-top: 36px; background: none; border: none; box-shadow: none; padding: 8px 0 0; }
   .social-panel {
     background: linear-gradient(160deg, var(--cream) 0%, var(--teal-tint) 100%);
     border: 1px solid var(--teal-tint); border-radius: 22px;
@@ -1236,8 +1236,9 @@
   (function () {
     var num = document.getElementById("proofNum");
     if (!num) return;
-    var TARGET = 105786, START = 5000, DUR = 2200, done = false;
+    var TARGET = 105786, START = 23750, DUR = 2600, done = false;
     function fmt(n) { return "$" + Math.round(n).toLocaleString("en-US"); }
+    num.style.willChange = "contents";
     num.textContent = fmt(START);              // show start value, not the final, until it ticks
     function run() {
       if (done) return; done = true;
