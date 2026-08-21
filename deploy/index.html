@@ -493,9 +493,9 @@
   }
   .social-head em {
     font-style: italic;
-    background: linear-gradient(120deg, #3AC9BE 0%, #34D8CC 55%, #5FE6DC 100%);
+    background: linear-gradient(90deg, var(--teal) 0%, var(--teal-deep) 100%);
     -webkit-background-clip: text; background-clip: text; color: transparent;
-    text-shadow: 0 2px 18px rgba(52,216,204,.32);
+    text-shadow: 0 2px 18px rgba(30,168,159,.28);
   }
   .social-line {
     text-align: center; max-width: 30ch; margin: 0 auto;
@@ -556,7 +556,7 @@
     font-family: "DM Serif Display", Georgia, serif; font-weight: 400; font-size: 30px;
     color: var(--charcoal); margin: 0 0 10px; letter-spacing: -0.01em; line-height: 1.06;
   }
-  .how-row h3 em { font-style: italic; color: var(--charcoal); }
+  .how-row h3 em { font-style: italic; color: var(--teal); }
   .how-row p {
     margin: 0 auto; max-width: 30ch;
     font-family: "Newsreader", Georgia, serif; font-weight: 400; font-size: 17px; line-height: 1.55; color: var(--muted);
@@ -598,7 +598,12 @@
     font-family: "Newsreader", Georgia, serif; font-size: 14.5px; line-height: 1.5; color: var(--muted);
   }
   .how-guarantee b { color: var(--charcoal); font-weight: 600; }
-  .how-guarantee b.g-amt { color: var(--teal-deep); font-weight: 700; }
+  .how-guarantee b.g-amt {
+    font-weight: 800;
+    background: linear-gradient(120deg, #0B7E77 0%, #12B7AC 45%, #34D8CC 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: #12B7AC;
+  }
 
   /* teal CTA variant (matches the big number) with a soft glow */
   .cta-num {
@@ -817,17 +822,17 @@
         <div class="how-row reveal how-late">
           <div class="n">Step 1</div>
           <h3>We build your <em>page</em></h3>
-          <p>We build you a personal brand. <b>You don't pay us</b> — we only ask for a % of the money we make for you.</p>
+          <p>We build you a personal brand. You don't pay us — we only ask for a % of the money we make for you.</p>
         </div>
         <div class="how-row reveal how-late">
           <div class="n">Step 2</div>
           <h3>You just <em>post</em></h3>
-          <p>We handle the ideation, growth strategy and systems. You just press post — takes <b>just 15 mins a day</b>, no experience needed.</p>
+          <p>We handle the ideation, growth strategy and systems. You just press post — takes just 15 mins a day, no experience needed.</p>
         </div>
         <div class="how-row reveal how-late grp3">
           <div class="n">Step 3</div>
           <h3>You get <em>paid</em></h3>
-          <p>We land you brand deals and your <b>content becomes income</b>, landing straight in your bank account.</p>
+          <p>We land you brand deals and your content becomes income, landing straight in your bank account.</p>
         </div>
       </div>
 
