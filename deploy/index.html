@@ -437,7 +437,7 @@
   /* ============================================================
      FACE MARQUEE — small auto-scrolling proof strip under the USPs
      ============================================================ */
-  .faces { padding: 10px 0 10px; overflow: hidden; }
+  .faces { padding: 64px 0 10px; overflow: hidden; }
   .faces-cap {
     text-align: center; font-size: 11.5px; font-weight: 700; letter-spacing: .16em;
     text-transform: uppercase; color: var(--teal); margin-bottom: 18px;
@@ -449,13 +449,13 @@
   .faces-viewport::before { left: 0; background: linear-gradient(90deg, var(--sand), rgba(247,240,230,0)); }
   .faces-viewport::after { right: 0; background: linear-gradient(270deg, var(--sand), rgba(247,240,230,0)); }
   .faces-track { display: flex; gap: 20px; width: max-content; transform: translate3d(0,0,0); }
-  .face-chip { display: flex; flex-direction: column; align-items: center; gap: 7px; flex: none; width: 74px; }
+  .face-chip { display: flex; flex-direction: column; align-items: center; gap: 7px; flex: none; width: 64px; }
   .face-chip > img {
-    width: 62px; height: 62px; border-radius: 50%; object-fit: cover; object-position: center 22%;
+    width: 52px; height: 52px; border-radius: 50%; object-fit: cover; object-position: center 22%;
     box-shadow: 0 6px 14px rgba(42,38,33,.16);
     background: var(--teal-tint);
   }
-  .face-chip .fn { display: flex; align-items: center; justify-content: center; gap: 4px; font-size: 12px; font-weight: 700; color: var(--charcoal); line-height: 1; }
+  .face-chip .fn { display: flex; align-items: center; justify-content: center; gap: 4px; font-size: 12px; font-weight: 700; color: var(--charcoal); line-height: 1; white-space: nowrap; }
   .face-chip .fr { font-size: 10px; color: var(--muted); line-height: 1; }
   @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
   @media (prefers-reduced-motion: reduce) { .faces-track { animation: none; } }
@@ -694,8 +694,8 @@
     .t-quote { font-size: 21px; }
 
     .faces-track { gap: 30px; }
-    .face-chip { width: 94px; }
-    .face-chip > img { width: 78px; height: 78px; }
+    .face-chip { width: 82px; }
+    .face-chip > img { width: 66px; height: 66px; }
     .plat-chip { width: 104px; height: 104px; border-radius: 26px; }
     .plat-chip img { width: 58px; height: 58px; }
     .social-head { font-size: 40px; }
