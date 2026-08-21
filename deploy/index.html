@@ -577,10 +577,12 @@
   .how-row { position: relative; padding-bottom: 4px; }
   .how-flow .how-row:not(:last-child)::after {
     content: ""; position: absolute; left: 50%; bottom: -40px; transform: translateX(-50%);
-    width: 30px; height: 30px; border-radius: 50%; background: var(--teal-tint);
+    width: 30px; height: 30px; border-radius: 50%;
+    box-shadow: 0 2px 10px rgba(52,216,204,.5), 0 0 16px rgba(52,216,204,.4);
     opacity: 0;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230E8079' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-    background-repeat: no-repeat; background-position: center; background-size: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"), linear-gradient(120deg, #0B7E77 0%, #12B7AC 45%, #34D8CC 100%);
+    background-repeat: no-repeat, no-repeat; background-position: center, center; background-size: 16px, cover;
+    animation: howBob 1.8s ease-in-out infinite;
     animation: howBob 1.8s ease-in-out infinite;
   }
   .how-row.in:not(:last-child)::after { opacity: 1; }
@@ -1235,29 +1237,7 @@
      recomputes on load / font-ready / orientation change — never on scroll. ---- */
   (function () {
     var num = document.getElementById("proofNum");
-    if (!num) return;
-    var TARGET = 105786, START = 23750, DUR = 2600, done = false;
-    function fmt(n) { return "$" + Math.round(n).toLocaleString("en-US"); }
-    num.style.willChange = "contents";
-    num.textContent = fmt(START);              // show start value, not the final, until it ticks
-    function run() {
-      if (done) return; done = true;
-      var t0 = null;
-      function step(ts) {
-        if (t0 === null) t0 = ts;
-        var p = Math.min((ts - t0) / DUR, 1);
-        var e = 1 - Math.pow(1 - p, 3);              // easeOutCubic
-        num.textContent = fmt(START + (TARGET - START) * e);
-        if (p < 1) requestAnimationFrame(step);
-        else num.textContent = fmt(TARGET);
-      }
-      requestAnimationFrame(step);
-    }
-    if (!("IntersectionObserver" in window)) { run(); return; }
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) { if (en.isIntersecting) { run(); io.disconnect(); } });
-    }, { threshold: 0.5 });
-    io.observe(num);
+    if (num) num.textContent = "$105,786";
   })();
 </script>
 
