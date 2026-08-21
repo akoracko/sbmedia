@@ -539,8 +539,31 @@
   .final-box h2 { font-size: 32px; font-weight: 600; margin-bottom: 12px; }
   .final-box > p { color: var(--muted); font-size: 16px; max-width: 30ch; margin: 0 auto 26px; }
 
+  .scarcity-box { max-width: 360px; margin: 0 auto 24px; }
+  .scarcity-row {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+    font-family: "Hanken Grotesk", sans-serif; font-size: 13px; font-weight: 600; color: var(--muted);
+    margin-bottom: 9px;
+  }
+  .scarcity-left { color: var(--teal-deep); font-weight: 800; white-space: nowrap; }
+  .scarcity-track { height: 8px; border-radius: 999px; background: rgba(42,38,33,.09); overflow: hidden; }
+  .scarcity-fill {
+    height: 100%; width: 90%; border-radius: 999px;
+    background: linear-gradient(90deg, #0B7E77 0%, #12B7AC 50%, #34D8CC 100%);
+    box-shadow: 0 0 10px rgba(52,216,204,.5);
+  }
+
   .foot { text-align: center; padding: 30px 0 46px; color: #b3a794; font-size: 12px; }
   .foot .brand { color: #9a8f7d; font-family: "Hanken Grotesk", sans-serif; font-weight: 700; font-size: 14px; letter-spacing: .01em; }
+  .faq-list { max-width: 640px; margin: 0 auto; }
+  .faq-start {
+    display: flex; align-items: center; justify-content: center; width: max-content; margin: 28px auto 0;
+    font-family: "Hanken Grotesk", sans-serif; font-weight: 700; font-size: 14px; color: var(--teal-deep);
+    text-decoration: none; background: var(--teal-tint); border: 1px solid rgba(18,183,172,.28);
+    border-radius: 999px; padding: 11px 26px;
+    transition: background .2s ease, transform .18s ease, box-shadow .2s ease;
+  }
+  .faq-start:hover { background: #cdeeea; transform: translateY(-1px); box-shadow: 0 6px 16px rgba(18,183,172,.22); }
 
   /* How it works — centered, matches the site's serif style */
   .how { }
@@ -749,6 +772,14 @@
     .final-box { padding: 60px 40px 54px; }
     .final-box h2 { font-size: 38px; }
   }
+  .cta-note.spots {
+    display: inline-flex; align-items: center; gap: 7px; margin-top: 14px;
+    font-family: "Hanken Grotesk", sans-serif; font-weight: 700; font-size: 13px; color: var(--teal-deep);
+  }
+  .cta-note.spots .pulse {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--teal); flex: none;
+    animation: pulse 1.6s ease-in-out infinite;
+  }
 </style>
 </head>
 <body>
@@ -894,6 +925,22 @@
     </div>
   </section>
 
+  <!-- ========================= FINAL CTA ========================= -->
+  <section class="final-cta-sec">
+    <div class="wrap">
+      <div class="faq-cta final-box">
+        <h2>Ready to get paid to post?</h2>
+        <div class="cta-inline-wrap">
+          <a class="cta cta-num" href="https://calendly.com/socialbanksmedia/quick-intro-call?hide_gdpr_banner=1&hide_event_type_details=1&primary_color=14b8ac&text_color=2a2621&background_color=f7f0e6" onclick="return openCalendly(event)">
+            Book My Free Call
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <p class="cta-note spots"><span class="pulse"></span>Only 4 spots available this month</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ========================= FAQ ========================= -->
   <section class="faq">
     <div class="wrap">
@@ -927,16 +974,7 @@
           <div class="faq-a"><p>Nope. <b>90% of our partners started with zero of both</b> — we build your platform from the ground up and support you the whole way.</p></div>
         </details>
       </div>
-      <div class="faq-cta final-box">
-        <h2>Ready to get paid to post?</h2>
-        <div class="cta-inline-wrap">
-          <a class="cta cta-num" href="https://calendly.com/socialbanksmedia/quick-intro-call?hide_gdpr_banner=1&hide_event_type_details=1&primary_color=14b8ac&text_color=2a2621&background_color=f7f0e6" onclick="return openCalendly(event)">
-            Book My Free Call
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-          <p class="cta-note">No commitment · No pressure · Only 10 mins</p>
-        </div>
-      </div>
+      <a class="faq-start" href="https://calendly.com/socialbanksmedia/quick-intro-call?hide_gdpr_banner=1&hide_event_type_details=1&primary_color=14b8ac&text_color=2a2621&background_color=f7f0e6" onclick="return openCalendly(event)">Start today</a>
     </div>
   </section>
 
